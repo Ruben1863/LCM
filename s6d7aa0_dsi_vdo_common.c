@@ -83,7 +83,7 @@ static struct LCM_setting_table lcm_initialization_setting[] =
 
 static struct LCM_setting_table lcm_deep_sleep_mode_in_setting[] = 
 {
-	{ 0x28, 0x01, {0x00}},
+    { 0x28, 0x01, {0x00}},
     { REGFLAG_DELAY, 20, {0x00}},
     { 0xF5, 0x12, {0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}},
     { REGFLAG_DELAY, 20, {0x00}},
@@ -118,22 +118,22 @@ static void lcm_get_params(LCM_PARAMS *params)
 {
 	memset(params, 0, sizeof(LCM_PARAMS));
 
-	params->dpi.dsc_params.slice_bpg_offset = 4;
-	params->dpi.dsc_params.initial_offset = 8;
-	params->dpi.io_driving_current = 48;
-	params->dsi.horizontal_active_pixel = 215;
-	params->width = 720;
-	params->type = 2;
-	params->dpi.dsc_params.xmit_delay = 2;
-	params->dpi.dsc_params.increment_interval = 2;
-	params->dpi.ctrl_io_driving_current = 720;
-	params->height = 1280;
-	params->dpi.dsc_params.flatness_maxqp = 1280;
-	params->dpi.dsc_params.bit_per_pixel = 3;
-	params->dpi.dsc_params.bit_per_channel = 3;
-	params->dpi.dsc_params.final_offset = 16;
-	params->dpi.dsc_params.rc_mode1_size = 16;
-	params->dpi.msb_io_driving_current = 16;
+	params->dsi.vertical_sync_active = 4;
+        params->dsi.vertical_backporch = 8;
+        params->dsi.horizontal_backporch = 48;
+        params->dsi.PLL_CLOCK = 215;
+        params->width = 720;
+        params->type = 2;
+        params->dsi.data_format.format = 2;
+        params->dsi.PS = 2;
+        params->dsi.horizontal_active_pixel = 720;
+        params->height = 1280;
+        params->dsi.vertical_active_line = 1280;
+        params->dsi.mode = 3;
+ 	params->dsi.LANE_NUM = 3;
+        params->dsi.vertical_frontporch = 16;
+   	params->dsi.horizontal_sync_active = 16;
+        params->dsi.horizontal_frontporch = 16;
 
 }
 
@@ -172,7 +172,8 @@ static void lcm_suspend(void)
 	MDELAY(120);
 }
 
-static void resume(void){
+static void lcm_resume(void)
+{
 	lcm_init();
 }
 
