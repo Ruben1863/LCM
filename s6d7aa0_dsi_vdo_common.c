@@ -121,7 +121,7 @@ static void lcm_get_params(LCM_PARAMS *params)
 	params->dsi.vertical_sync_active = 4;
         params->dsi.vertical_backporch = 8;
         params->dsi.horizontal_backporch = 48;
-        params->dsi.PLL_CLOCK = 215;
+        params->dsi.PLL_CLOCK = 284; //215
         params->width = 720;
         params->type = 2;
         params->dsi.data_format.format = 2;
